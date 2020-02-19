@@ -1,0 +1,45 @@
+<mat-nav-list>
+  <div class="profile-card">
+    <div class="header">
+      <img
+        src="https://pbs.twimg.com/profile_images/378800000107983641/e07f88f9eee6a64ab1cc0c69dd1ff314_400x400.jpeg"
+      />
+      <h2>Ajay Donode</h2>
+      <h4>ajaydonode@gmail.com</h4>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <form class="search">
+    <mat-form-field class="example-full-width">
+      <mat-label>Search</mat-label>
+      <input type="tel" matInput />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </form>
+  <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Dashboard</a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/posts">Posts</a> -->
+  <!-- <mat-divider></mat-divider> -->
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+      <!-- use a disabled button to provide padding for tree leaf -->
+      <!-- <button mat-icon-button disabled></button> -->
+      <button mat-icon-button disabled>
+        <mat-icon>
+          table_chart
+        </mat-icon>
+      </button>
+      <a  routerLinkActive="list-item-active" routerLink="/dashboard/info" class="item"> {{node.name}}</a>
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+      <button mat-icon-button matTreeNodeToggle
+              [attr.aria-label]="'toggle ' + node.name">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+      {{node.name}}
+    </mat-tree-node>
+  </mat-tree>
+</mat-nav-list>

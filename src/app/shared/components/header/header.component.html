@@ -1,0 +1,41 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>OpenGlass</span>
+    <div  fxLayout="row" fxFlex fxLayoutAlign="end" >
+      <ul  fxLayout="row" fxLayoutGap="5px">
+        <li>
+          <button mat-button [mat-menu-trigger-for]="menu">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>dialpad</mat-icon>
+              <span>Info</span>
+            </button>
+            <button mat-menu-item disabled>
+              <mat-icon>notifications</mat-icon>
+              <span>Notifications</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Log out</span>
+            </button>
+          </mat-menu>
+        </li>
+        <li>
+          <button mat-icon-button>
+            <mat-icon>help_outline</mat-icon>
+          </button>
+        </li>
+        <li>
+          <button mat-icon-button>
+            <mat-icon>settings</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
