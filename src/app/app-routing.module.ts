@@ -17,7 +17,7 @@ const routes: Routes = [
     path: 'dashboard',
     component: DefaultComponent,
     children: [{
-      path: '',
+      path: 'info/:id',
       component: DashboardComponent
     },
     {

@@ -29,7 +29,7 @@
           table_chart
         </mat-icon>
       </button>
-      <a  routerLinkActive="list-item-active" routerLink="/dashboard/info" class="item"> {{node.name}}</a>
+      <a  routerLinkActive="list-item-active" routerLink="/dashboard/info/{{node.name}}" class="item"> {{node.name}}</a>
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes -->
     <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
