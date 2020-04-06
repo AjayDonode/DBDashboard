@@ -3,6 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { PostsComponent } from './modules/posts/posts.component';
+import { ConnectionsComponent } from './modules/connections/connections.component';
+import { FlowsComponent } from './modules/flows/flows.component';
+import { SchedulesComponent } from './modules/schedules/schedules.component';
+import { AuditComponent } from './modules/audit/audit.component';
 
 
 const routes: Routes = [
@@ -14,11 +18,29 @@ const routes: Routes = [
       )
   },
   {
+    path: 'connections',
+    component: ConnectionsComponent
+  },
+  {
     path: 'dashboard',
     component: DefaultComponent,
     children: [{
       path: 'info/:id',
       component: DashboardComponent
+    }, {
+      path: 'connections',
+      component: ConnectionsComponent
+    },
+    {
+      path: 'flows',
+      component: FlowsComponent
+    }, {
+      path: 'schedules',
+      component: SchedulesComponent
+    },
+    {
+      path: 'audit',
+      component: AuditComponent
     },
     {
       path: 'posts',

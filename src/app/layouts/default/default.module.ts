@@ -8,19 +8,48 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
+import { ConnectionsComponent } from 'src/app/modules/connections/connections.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SelectConnectionDialogComponent } from 'src/app/modules/connections/select-connection-dialog/select-connection-dialog.component';
+import { FlowsComponent } from 'src/app/modules/flows/flows.component';
+import { SchedulesComponent } from 'src/app/modules/schedules/schedules.component';
+import { AuditComponent } from 'src/app/modules/audit/audit.component';
 
 @NgModule({
   declarations: [
     DefaultComponent,
     DashboardComponent,
-    PostsComponent],
+    FlowsComponent,
+    SchedulesComponent,
+    AuditComponent,
+    PostsComponent,
+    ConnectionsComponent,
+    SelectConnectionDialogComponent],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
     MatSidenavModule,
     MatDividerModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule,
+    MatButtonToggleModule,
+    MatFormFieldModule, MatAutocompleteModule, MatInputModule, FormsModule, ReactiveFormsModule,
+    MatIconModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatDialogModule
   ]
 })
 export class DefaultModule { }

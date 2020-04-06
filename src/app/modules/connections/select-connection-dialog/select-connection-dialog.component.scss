@@ -1,0 +1,34 @@
+mat-dialog-content {
+  width: 1000px;
+  height: 800px;
+  background-color: lightblue;
+}
+
+mat-grid-tile {
+  background-color: burlywood;
+}
+
+.row {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: last baseline;
+}
+.col {
+    display: inline-block;
+    width: inherit;
+}
+
+.col-menu {
+  display: inline-block;
+  width: 200px;
+  border-right: solid thin cornflowerblue;
+}
+
+.search {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: last baseline;
+}
