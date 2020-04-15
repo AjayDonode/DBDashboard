@@ -1,1 +1,28 @@
-<p>flows works!</p>
+<mat-card class="connectionsbox">
+
+  <mat-card-header>
+    <div width="50%">
+    <mat-form-field appearance="outline">
+      <mat-label>Tags...</mat-label>
+      <mat-select [formControl]="" multiple>
+        <mat-option> </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button color="primary">
+      <mat-icon matSuffix>label</mat-icon>
+    </button>
+    </div>
+    <div  width="50%">
+    <mat-form-field appearance="outline" class="tp-full-width">
+      <mat-label>Search</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input type="text" matInput placeholder="Search">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    <button class="mdc-button mdc-button--outlined" color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+</mat-card>

@@ -1,0 +1,11 @@
+{
+  "/dc_services/*": {
+      "target": "http://dcdataservices.herokuapp.com",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true,
+    "pathRewrite": {
+      "^/dc_services": ""
+    }
+  }
+}

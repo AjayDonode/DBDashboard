@@ -20,6 +20,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatListModule} from '@angular/material/list';
+import { BrowserModule }  from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+
 import { SelectConnectionDialogComponent } from 'src/app/modules/connections/select-connection-dialog/select-connection-dialog.component';
 import { FlowsComponent } from 'src/app/modules/flows/flows.component';
 import { SchedulesComponent } from 'src/app/modules/schedules/schedules.component';
@@ -39,6 +43,7 @@ import { AuditComponent } from 'src/app/modules/audit/audit.component';
     CommonModule,
     RouterModule,
     SharedModule,
+    BrowserModule, HttpClientModule,
     MatSidenavModule,
     MatDividerModule,
     MatCardModule,
@@ -49,7 +54,8 @@ import { AuditComponent } from 'src/app/modules/audit/audit.component';
     MatSelectModule,
     MatMenuModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatListModule
   ]
 })
 export class DefaultModule { }

@@ -3,11 +3,11 @@
     <button mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
-    <span>OpenGlass</span>
+    <span>Conduit</span>
     <div  fxLayout="row" fxFlex fxLayoutAlign="end" >
       <ul  fxLayout="row" fxLayoutGap="5px">
         <li>
-          <button mat-button [mat-menu-trigger-for]="menu">
+          <button mat-icon-button [mat-menu-trigger-for]="menu">
             <mat-icon>account_circle</mat-icon>
           </button>
           <mat-menu #menu="matMenu">

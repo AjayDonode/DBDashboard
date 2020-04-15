@@ -1,32 +1,43 @@
-<div mat-dialog-title align="end"> <button mat-icon-button mat-dialog-close>
+<div mat-dialog-title align="end">
+
+  <button mat-icon-button mat-dialog-close>
     <mat-icon> close</mat-icon>
   </button> </div>
 <mat-dialog-content class="mat-typography">
   <div class="row">
-    <div class="col-menu"> Menu </div>
+    <div class="col-menu">
+      <mat-nav-list>
+        <mat-list-item (click)="showInfoAll()">
+          <label>All</label>
+       </mat-list-item>
+        <mat-list-item (click)="showInfo(connection)" *ngFor="let connection of connections" >
+           <label>{{ connection.name  }}</label>
+        </mat-list-item>
+      </mat-nav-list>
+
+    </div>
     <div class="col">
-      <div class="search">
-      <form class="tp-form">
-        <h4>Select Connection Type</h4>
-        <mat-form-field appearance="outline">
-          <mat-label>Search</mat-label>
-          <mat-icon matPrefix>search</mat-icon>
-          <input type="text" matInput placeholder="Search">
-        </mat-form-field>
-      </form>
+      <div class="example-container1">
+        <!-- <mat-label>Select Connection Type: </mat-label> -->
+        <mat-form-field  appearance="outline" [floatLabel]="">
+        <mat-icon matPrefix>search</mat-icon>
+        <mat-label>Select Connection Type</mat-label>
+        <input matInput placeholder="Select Connection Type">
+      </mat-form-field>
       </div>
-      <mat-grid-list cols="3">
-        <mat-grid-tile
-            *ngFor="let connection of connections">
-            <mat-card>
-              <mat-card-content>
-
-                <h3>{{connection.name}}</h3></mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-grid-list cols="4">
+        <mat-grid-tile *ngFor="let connectionType of connectionTypes">
+            <mat-card (click)="navigate(connectionType)">
+              <mat-card-header style="align-items: center;">{{connectionType.name}}</mat-card-header>
+              <mat-divider></mat-divider>
+              <mat-card-content >
+                <br>
+              <img src="assets/images/{{connectionType.img}}" >
+                </mat-card-content>
             </mat-card>
-
         </mat-grid-tile>
       </mat-grid-list>
-
     </div>
   </div>
 </mat-dialog-content>
