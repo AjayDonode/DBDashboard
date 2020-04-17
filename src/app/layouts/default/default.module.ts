@@ -23,11 +23,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import { BrowserModule }  from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { SelectConnectionDialogComponent } from 'src/app/modules/connections/select-connection-dialog/select-connection-dialog.component';
 import { FlowsComponent } from 'src/app/modules/flows/flows.component';
 import { SchedulesComponent } from 'src/app/modules/schedules/schedules.component';
 import { AuditComponent } from 'src/app/modules/audit/audit.component';
+import { RegisterComponent } from 'src/app/modules/register/register.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,8 @@ import { AuditComponent } from 'src/app/modules/audit/audit.component';
     AuditComponent,
     PostsComponent,
     ConnectionsComponent,
-    SelectConnectionDialogComponent],
+    SelectConnectionDialogComponent,
+    RegisterComponent],
   imports: [
     CommonModule,
     RouterModule,

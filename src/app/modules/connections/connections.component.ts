@@ -38,7 +38,7 @@ export class ConnectionsComponent implements OnInit {
     const dialogRef = this.dialog.open(SelectConnectionDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       this.selectedConnectionType = result;
-      this.renderForm();
+      // this.renderForm();
       console.log(`Dialog result: ${result.name}`);
     });
   }

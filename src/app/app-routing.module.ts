@@ -7,7 +7,7 @@ import { ConnectionsComponent } from './modules/connections/connections.componen
 import { FlowsComponent } from './modules/flows/flows.component';
 import { SchedulesComponent } from './modules/schedules/schedules.component';
 import { AuditComponent } from './modules/audit/audit.component';
-import { RegisterComponent } from './modules/register/register.component'
+import { RegisterComponent } from './modules/register/register.component';
 
 
 const routes: Routes = [
@@ -19,13 +19,8 @@ const routes: Routes = [
       )
   },
   {
-   // path: 'register',
-    //component: RegisterComponent
-    path: '',
-    loadChildren: () =>
-      import('./modules/register/register.module').then(
-        m => m.RegisterModule
-      )
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'connections',
