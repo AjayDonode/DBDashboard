@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { SelectConnectionDialogComponent } from './select-connection-dialog/select-connection-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConnectionService } from 'src/app/services/connection.service';
@@ -11,6 +11,7 @@ import { ConnectionService } from 'src/app/services/connection.service';
 })
 export class ConnectionsComponent implements OnInit {
 
+  form: FormGroup;
   title = 'materialApp';
   myControl = new FormControl();
   tags = [];
@@ -19,7 +20,8 @@ export class ConnectionsComponent implements OnInit {
   @ViewChild('div') div: ElementRef;
 
 
-  constructor(private dialog: MatDialog, private conncetionService: ConnectionService, private renderer: Renderer2) {
+  constructor(private dialog: MatDialog, private conncetionService: ConnectionService, formBuilder: FormBuilder ) {
+    this.setViewForm(formBuilder);
     this.loadStates();
     this.loadConnections();
   }
@@ -30,6 +32,12 @@ export class ConnectionsComponent implements OnInit {
   loadStates() {
     this.tags = ['data migration', 'examples', 'mapping', 'redshift', 'scripting', 'snowflake',
       'transformations', 'user-defined api', 'validation', 'web services', 'workfing with files', 'workflow', 'xslt'];
+  }
+
+  setViewForm(formBuilder: FormBuilder) {
+    this.form = formBuilder.group({
+
+    });
   }
 
   openDialog() {
@@ -69,7 +77,6 @@ export class ConnectionsComponent implements OnInit {
   }
 
   renderForm() {
-
     let formdata = [{
       name: 'Connection Name',
       type: 'input',
@@ -84,29 +91,5 @@ export class ConnectionsComponent implements OnInit {
       value: ''
     }
     ]
-    const form: HTMLParagraphElement = this.renderer.createElement('form');
-    let htmlcontent = '';
-    formdata.forEach(element => {
-      console.log(element.name);
-      switch (element.type) {
-        case 'input': {
-          htmlcontent = htmlcontent + '<mat-form-field appearance="outline"> <mat-label>'+element.name+'</mat-label> <input matInput placeholder="'+element.name+'"></mat-form-field> <br>';
-          break;
-        }
-        case 'select': {
-          htmlcontent = htmlcontent + '<mat-form-field appearance="outline"> <mat-label>'+element.name+'</mat-label> <input type="text" matInput placeholder="'+element.name+'"></mat-form-field><br>';
-          break;
-        } case 'textarea': {
-          htmlcontent = htmlcontent + '<mat-form-field appearance="outline"> <mat-label>'+element.name+'</mat-label> <input type="text" matInput placeholder="'+element.name+'"></mat-form-field><br>';
-          break;
-        }
-        default: {
-          //statements;
-          break;
-        }
-      }
-    });
-    form.innerHTML = htmlcontent;
-    this.renderer.appendChild(this.div.nativeElement, form);
   }
 }

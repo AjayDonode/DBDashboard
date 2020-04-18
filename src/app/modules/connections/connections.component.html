@@ -29,22 +29,23 @@
       </form>
     </mat-card>
   </div>
-  <div class="col-lg-7">
+  <div class="col-lg-7" >
+    <form [formGroup]="form">
     <mat-card class="form-card" *ngIf="selectedConnectionType">
       <mat-card-header> <img src='assets/images/{{selectedConnectionType.img}}' style="height: 50%;" slot="start">
         <mat-label> {{selectedConnectionType?.name}} Connection</mat-label>
       </mat-card-header>
-      <mat-card-content >
-        <form novalidate >
+      <mat-card-content>
+
           <mat-form-field class="full-width" appearance="fill">
             <mat-label>Connection Name</mat-label>
-            <input matInput placeholder="Name" formControlName="name" >
+            <input matInput placeholder="Name" formControlName="connectionName" >
           </mat-form-field>
           <!-- Email -->
           <br>
           <mat-form-field class="full-width" appearance="fill">
             <mat-label>Tags...</mat-label>
-            <mat-select [formControl]="" multiple >
+            <mat-select [formControl]="" multiple>
               <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -55,65 +56,73 @@
           </mat-form-field>
           <hr>
           <div style="text-align: right;">
-          <label>URL * </label>
-          <mat-form-field class="full-width" appearance="fill">
-            <input matInput placeholder="jdbc:snowflake://account_name.snowflakecomputing.com/?warehouse=warehouse&db=database&schema=schema" required>
-          </mat-form-field>
-          <hr>
-          <label>Account Name </label>
-          <mat-form-field class="full-width" appearance="fill">
-            <input matInput placeholder="" required>
-          </mat-form-field>
-          <br>
-          <label>Warehouse Name </label>
-          <mat-form-field class="full-width" appearance="fill">
-            <input matInput placeholder="" required>
-          </mat-form-field>
-          <br>
-          <label>Database Name </label>
-          <mat-form-field class="full-width" appearance="fill">
-            <input matInput placeholder="" required>
-          </mat-form-field>
-          <br>
-          <label>Schema Name </label>
-          <mat-form-field class="full-width" appearance="fill">
-            <input matInput placeholder="public">
-          </mat-form-field>
-          <hr>
-          <label>User </label>
-          <mat-form-field class="full-width" appearance="fill">
-            <input matInput placeholder="Enter user name" required>
-          </mat-form-field>
-          <br>
-          <label>Password </label>
-          <mat-form-field class="full-width" appearance="fill">
-            <input type="password" matInput placeholder="Enter password">
-          </mat-form-field>
+            <label>URL * </label>
+            <mat-form-field class="full-width" appearance="fill">
+              <input matInput
+                placeholder="jdbc:snowflake://account_name.snowflakecomputing.com/?warehouse=warehouse&db=database&schema=schema"
+                required>
+            </mat-form-field>
+            <hr>
+            <label>Account Name </label>
+            <mat-form-field class="full-width" appearance="fill">
+              <input matInput placeholder="" required>
+            </mat-form-field>
+            <br>
+            <label>Warehouse Name </label>
+            <mat-form-field class="full-width" appearance="fill">
+              <input matInput placeholder="" required>
+            </mat-form-field>
+            <br>
+            <label>Database Name </label>
+            <mat-form-field class="full-width" appearance="fill">
+              <input matInput placeholder="" required>
+            </mat-form-field>
+            <br>
+            <label>Schema Name </label>
+            <mat-form-field class="full-width" appearance="fill">
+              <input matInput placeholder="public">
+            </mat-form-field>
+            <hr>
+            <label>User </label>
+            <mat-form-field class="full-width" appearance="fill">
+              <input matInput placeholder="Enter user name" required>
+            </mat-form-field>
+            <br>
+            <label>Password </label>
+            <mat-form-field class="full-width" appearance="fill">
+              <input type="password" matInput placeholder="Enter password">
+            </mat-form-field>
 
 
-          <hr>
-          <label>Stage Name
-          </label>
-          <mat-form-field class="full-width" appearance="fill">
-            <input matInput placeholder="Enter user name" required>
-          </mat-form-field>
-          <br>
-          <label>Password </label>
-          <mat-form-field class="full-width" appearance="fill">
-            <input type="password" matInput placeholder="Enter password">
-          </mat-form-field>
+            <hr>
+            <label>Stage Name
+            </label>
+            <mat-form-field class="full-width" appearance="fill">
+              <input matInput
+                placeholder="Enter name of the location where your data files are stored for loading into Snowflake"
+                required>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-checkbox>Auto Commit </mat-checkbox>
+              <mat-icon name="info"></mat-icon>
+            </mat-form-field>
+            <br>
+            <label>Run at Connect </label>
+            <mat-form-field class="full-width" appearance="fill">
+              <textarea matInput placeholder="Enter SQL to run each time at connect"></textarea>
+            </mat-form-field>
 
 
 
-        </div>
+          </div>
           <mat-card-actions slot="end">
-              <button mat-flat-button >Test Connection</button>
-              <button mat-flat-button color="primary">Save</button> <button mat-flat-button >Cancel</button>
+            <button mat-flat-button>Test Connection</button>
+            <button mat-flat-button color="primary">Save</button> <button mat-flat-button>Cancel</button>
           </mat-card-actions>
-
-        </form>
       </mat-card-content>
     </mat-card>
+  </form>
   </div>
 
 </div>

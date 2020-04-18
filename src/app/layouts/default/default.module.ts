@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatListModule} from '@angular/material/list';
 import { BrowserModule }  from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -56,7 +57,8 @@ import { RegisterComponent } from 'src/app/modules/register/register.component';
     MatMenuModule,
     MatButtonModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
+    MatCheckboxModule
   ]
 })
 export class DefaultModule { }
