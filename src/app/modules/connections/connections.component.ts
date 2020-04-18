@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SelectConnectionDialogComponent } from './select-connection-dialog/select-connection-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConnectionService } from 'src/app/services/connection.service';
@@ -11,22 +11,25 @@ import { ConnectionService } from 'src/app/services/connection.service';
 })
 export class ConnectionsComponent implements OnInit {
 
-  form: FormGroup;
+  formConnection: FormGroup;
+  // formSelect: FormGroup;
   title = 'materialApp';
-  myControl = new FormControl();
+  // myControl = new FormControl();
   tags = [];
   connections: any = [];
   selectedConnectionType: any;
   @ViewChild('div') div: ElementRef;
 
 
-  constructor(private dialog: MatDialog, private conncetionService: ConnectionService, formBuilder: FormBuilder ) {
-    this.setViewForm(formBuilder);
+  constructor(private dialog: MatDialog, private conncetionService: ConnectionService, private formBuilder: FormBuilder) {
+
     this.loadStates();
     this.loadConnections();
+    this.setViewForm();
   }
 
   ngOnInit(): void {
+
   }
 
   loadStates() {
@@ -34,9 +37,21 @@ export class ConnectionsComponent implements OnInit {
       'transformations', 'user-defined api', 'validation', 'web services', 'workfing with files', 'workflow', 'xslt'];
   }
 
-  setViewForm(formBuilder: FormBuilder) {
-    this.form = formBuilder.group({
-
+  setViewForm() {
+    this.formConnection = this.formBuilder.group({
+      'connectionName': [null, [Validators.required]],
+      'description': [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      'url': [null, Validators.required],
+      'accountName': '',
+      'wearhouseName': '',
+      'databaseName': '',
+      'isAutoCommit': '',
+      'runAtConnect': '',
+      'jdbcFetchSize': '',
+      'maxFieldSize': '',
+      'maxRowsToRead': '',
+      'incloseInQuote': '',
+      'curruntDB': ''
     });
   }
 
@@ -46,7 +61,7 @@ export class ConnectionsComponent implements OnInit {
     const dialogRef = this.dialog.open(SelectConnectionDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       this.selectedConnectionType = result;
-      // this.renderForm();
+
       console.log(`Dialog result: ${result.name}`);
     });
   }

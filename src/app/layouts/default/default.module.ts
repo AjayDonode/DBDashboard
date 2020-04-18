@@ -51,7 +51,7 @@ import { RegisterComponent } from 'src/app/modules/register/register.component';
     MatCardModule,
     MatGridListModule,
     MatButtonToggleModule,
-    MatFormFieldModule, MatAutocompleteModule, MatInputModule, FormsModule, ReactiveFormsModule,
+    MatFormFieldModule, MatInputModule, MatAutocompleteModule, FormsModule, ReactiveFormsModule,
     MatIconModule,
     MatSelectModule,
     MatMenuModule,
