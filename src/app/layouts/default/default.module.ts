@@ -30,6 +30,9 @@ import { SchedulesComponent } from 'src/app/modules/schedules/schedules.componen
 import { AuditComponent } from 'src/app/modules/audit/audit.component';
 import { RegisterComponent } from 'src/app/modules/register/register.component';
 
+
+import { SnowflakeComponent } from 'src/app/modules/connections/forms/snowflake/snowflake.component';
+
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -40,7 +43,8 @@ import { RegisterComponent } from 'src/app/modules/register/register.component';
     PostsComponent,
     ConnectionsComponent,
     SelectConnectionDialogComponent,
-    RegisterComponent],
+    RegisterComponent,
+    SnowflakeComponent],
   imports: [
     CommonModule,
     RouterModule,

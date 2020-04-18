@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse, HttpClient, HttpHeaders } from '@angular/common/http';
+import { Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
 import { Connection } from '../modals/connection.modal';
@@ -30,6 +31,10 @@ export class ConnectionService  {
   }
 
   getConnectionsById(appId: number): Observable<Connection[]> {
-    return this.http.get<Connection[]>(this.baseUrl + 'sources');
+    return this.http.get<Connection[]>(this.baseUrl + '/sources', this.httpOptions);
+  }
+
+  saveConnection(connection: Connection): Observable<any> {
+    return this.http.post<any>(this.baseUrl + '/sources', connection, this.httpOptions);
   }
 }

@@ -11,7 +11,7 @@ import { ConnectionService } from 'src/app/services/connection.service';
 })
 export class ConnectionsComponent implements OnInit {
 
-  formConnection: FormGroup;
+
   // formSelect: FormGroup;
   title = 'materialApp';
   // myControl = new FormControl();
@@ -21,11 +21,10 @@ export class ConnectionsComponent implements OnInit {
   @ViewChild('div') div: ElementRef;
 
 
-  constructor(private dialog: MatDialog, private conncetionService: ConnectionService, private formBuilder: FormBuilder) {
+  constructor(private dialog: MatDialog, private conncetionService: ConnectionService) {
 
     this.loadStates();
     this.loadConnections();
-    this.setViewForm();
   }
 
   ngOnInit(): void {
@@ -37,23 +36,7 @@ export class ConnectionsComponent implements OnInit {
       'transformations', 'user-defined api', 'validation', 'web services', 'workfing with files', 'workflow', 'xslt'];
   }
 
-  setViewForm() {
-    this.formConnection = this.formBuilder.group({
-      'connectionName': [null, [Validators.required]],
-      'description': [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-      'url': [null, Validators.required],
-      'accountName': '',
-      'wearhouseName': '',
-      'databaseName': '',
-      'isAutoCommit': '',
-      'runAtConnect': '',
-      'jdbcFetchSize': '',
-      'maxFieldSize': '',
-      'maxRowsToRead': '',
-      'incloseInQuote': '',
-      'curruntDB': ''
-    });
-  }
+
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
@@ -77,6 +60,10 @@ export class ConnectionsComponent implements OnInit {
       childs: [{ name: 'AWS', img: 'postgresql.png' }, { name: 'Amazon S3', img: 's3.png' }]
     },
     {
+      name: 'Snowflakes',
+      childs: [{ name: 'Snowflake', img: 'snowflake.png' }, { name: 'Snowflake S3', img: 's3.png' }]
+    },
+    {
       name: 'Database',
       childs: [{ name: 'Microsoft Sql Server', img: 'snowflake.png' }, { name: 'Snowflake S3', img: 's3.png' }]
     },
@@ -91,20 +78,10 @@ export class ConnectionsComponent implements OnInit {
     ]
   }
 
-  renderForm() {
-    let formdata = [{
-      name: 'Connection Name',
-      type: 'input',
-      value: ''
-    }, {
-      name: 'Tags',
-      type: 'select',
-      value: ''
-    }, {
-      name: 'Description',
-      type: 'textarea',
-      value: ''
-    }
-    ]
-  }
+  public save(formValue: any): void {
+    console.log('Form Value in Parent : ', formValue);
+    this.conncetionService.saveConnection(formValue).subscribe(res => {
+      console.log(res);
+    });
+}
 }
