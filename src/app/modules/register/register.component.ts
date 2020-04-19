@@ -11,7 +11,7 @@ import { AppUser } from 'src/app/modals/appuser.modal';
 export class RegisterComponent implements OnInit {
   email: string;
   password: string;
-  appUser:AppUser;
+  appUser: AppUser;
   constructor(private router: Router, private authService: AuthService) { }
 
   public register(email: string, password: string) {

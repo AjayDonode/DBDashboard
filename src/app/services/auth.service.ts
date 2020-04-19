@@ -8,13 +8,15 @@ import { AppUser } from '../modals/appuser.modal';
 export class AuthService {
   login(email: string, password: string): Promise<any> {
     //TODO implement Auth service
+
+    // localStorage.setItem('user', null);
     let appuser: AppUser = new AppUser();
     let username = '';
-    if (email = 'ajaydonode@cisco.com') {
+    if (email == 'ajaydonode@cisco.com') {
       username = 'Ajay Donode';
-    } else if (email = 'sumalik@cisco.com') {
+    } else if (email == 'sumalik@cisco.com') {
       username = 'Sunny Mallik';
-    } else if (email = 'lalitagr@cisco.com') {
+    } else if (email == 'lalitagr@cisco.com') {
       username = 'Lalit Agrawal';
     }
     appuser.name = username;
@@ -29,6 +31,10 @@ export class AuthService {
   getCurrentUser(): AppUser {
     let user: AppUser = JSON.parse(localStorage.getItem('user'));
     return user;
+  }
+
+  logOut() {
+    localStorage.removeItem('user');
   }
 
   constructor() { }

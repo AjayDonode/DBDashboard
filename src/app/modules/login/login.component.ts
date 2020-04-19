@@ -11,7 +11,7 @@ import { AppUser } from 'src/app/modals/appuser.modal';
 export class LoginComponent implements OnInit {
   email: string;
   password: string;
-  appUser:AppUser;
+  appUser: AppUser;
   constructor(private router: Router, private authService: AuthService) { }
 
   public login(email: string, password: string) {

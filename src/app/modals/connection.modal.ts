@@ -6,3 +6,15 @@ export class Connection {
   datasourceimage: string;
   activeflag: number;
 }
+
+
+export class DataHub {
+  datahubid: string;
+  datahubname: string;
+  datasourceid: string;
+  activeflag: boolean;
+  conndescription: string;
+  connectionpayload: any;
+}
+
+

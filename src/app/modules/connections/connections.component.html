@@ -1,37 +1,68 @@
 <div class="row">
   <div class="col-lg-3">
     <mat-card class="connectionsbox">
-      <div class="btn-group">
+      <mat-card-content>
+        <!-- <div class="btn-group">
         <button mat-button color='primary'> Connections </button>
         <button mat-button color='primary'> Listners </button>
         <button mat-button color='primary'> Formats </button>
-      </div>
-      <form class="tp-form">
-        <mat-form-field class="tp-full-width">
-          <mat-label>Tags...</mat-label>
-          <mat-select multiple>
-            <mat-option *ngFor="let tag of tags">{{tag}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button mat-icon-button color="primary">
-          <mat-icon matSuffix>label</mat-icon>
-        </button>
-        <mat-form-field class="tp-full-width">
-          <mat-label>Search</mat-label>
-          <mat-icon matPrefix>search</mat-icon>
-          <input type="text" matInput placeholder="Search">
-          <mat-icon matSuffix>mode_edit</mat-icon>
-        </mat-form-field>
-        <button mat-icon-button color="primary" (click)="openDialog()">
-          <mat-icon>add</mat-icon>
-        </button>
+      </div> -->
+        <form class="tp-form">
+
+          <mat-form-field class="tp-full-width">
+            <mat-label>Tags</mat-label>
+            <mat-select multiple>
+              <mat-option *ngFor="let tag of tags">{{ tag }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button color="primary">
+            <mat-icon matSuffix>label</mat-icon>
+          </button>
+          <mat-form-field class="tp-full-width">
+            <mat-label>Search</mat-label>
+            <mat-icon matPrefix>search</mat-icon>
+            <input type="text" matInput placeholder="Search" [formControl]="myControl" />
+            <mat-icon matSuffix>mode_edit</mat-icon>
+          </mat-form-field>
+          <button mat-icon-button color="primary" (click)="openDialog()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </form>
         <mat-divider></mat-divider>
-      </form>
+        <mat-nav-list>
+          <mat-list-item
+            (click)="selectDataHub(dataHub)"
+            *ngFor="let dataHub of dataHubs"
+          >
+            <label>{{ dataHub.datahubname }}</label>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-card-content>
     </mat-card>
   </div>
   <div class="col-lg-7" [ngSwitch]="selectedConnectionType?.name">
-    <app-snowflake *ngSwitchCase="'Snowflake'" [selectedConnection]="selectedConnectionType" [tags]="tags" (saveFormEvent)="save($event)" >SnowFlake</app-snowflake>
-    <p *ngSwitchDefault>Standard diet</p>
+    <app-snowflake
+      *ngSwitchCase="'Snowflake'"
+      [selectedConnection]="selectedConnectionType"
+      [dataHub]="dataHub"
+      [tags]="tags"
+      (saveFormEvent)="save($event)"
+      >SnowFlake</app-snowflake
+    >
+    <div *ngSwitchDefault>
+      <mat-card class="form-card">
+        <mat-card-header>
+          <div
+            mat-card-avatar
+            style="
+              background-image: url('assets/images/oracle.png');
+              background-size: cover;
+            "
+          ></div>
+          <mat-card-title> Connections </mat-card-title>
+        </mat-card-header>
+        <mat-card-content> </mat-card-content>
+      </mat-card>
+    </div>
   </div>
-
 </div>

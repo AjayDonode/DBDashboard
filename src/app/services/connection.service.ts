@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpResponse, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
-import { BaseService } from './base.service';
 import { Connection } from '../modals/connection.modal';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 @Injectable()
-export class ConnectionService  {
-  baseUrl = 'https://dcdataservices.herokuapp.com/dc_services';
+export class ConnectionService {
+  baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) {
     // super();
@@ -25,8 +25,8 @@ export class ConnectionService  {
   }
 
 
-  getConnections(): Observable<Connection[]> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+  getConnections(): Observable<Connection[]> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get<Connection[]>(this.baseUrl + '/sourcesall');
   }
 
@@ -34,7 +34,5 @@ export class ConnectionService  {
     return this.http.get<Connection[]>(this.baseUrl + '/sources', this.httpOptions);
   }
 
-  saveConnection(connection: Connection): Observable<any> {
-    return this.http.post<any>(this.baseUrl + '/sources', connection, this.httpOptions);
-  }
+
 }

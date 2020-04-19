@@ -67,13 +67,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "DBDashboard:build",
-            "proxyConfig": "proxy.conf.json"
+            "browserTarget": "DBDashboard:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "DBDashboard:build:production",
-              "proxyConfig": "proxy.conf.json"
+              "browserTarget": "DBDashboard:build:production"
             }
           }
         },

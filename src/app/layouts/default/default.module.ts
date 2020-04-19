@@ -22,7 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatListModule} from '@angular/material/list';
-import { BrowserModule }  from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { SelectConnectionDialogComponent } from 'src/app/modules/connections/select-connection-dialog/select-connection-dialog.component';
 import { FlowsComponent } from 'src/app/modules/flows/flows.component';
@@ -63,6 +63,7 @@ import { SnowflakeComponent } from 'src/app/modules/connections/forms/snowflake/
     MatDialogModule,
     MatListModule,
     MatCheckboxModule
-  ]
+  ],
+  exports: [ SnowflakeComponent ]
 })
 export class DefaultModule { }

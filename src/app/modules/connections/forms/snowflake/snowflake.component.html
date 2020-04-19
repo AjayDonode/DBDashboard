@@ -1,9 +1,14 @@
 <form [formGroup]="formConnection" novalidate (ngSubmit)="save(formConnection.value)">
   <!-- <mat-card class="form-card" *ngIf="selectedConnectionType"> -->
     <mat-card class="form-card">
-    <mat-card-header> <img src='assets/images/{{selectedConnection.img}}' style="height: 50%;" slot="start">
+    <!-- <mat-card-header> <img src='assets/images/{{selectedConnection.img}}' style="height: 50%;" slot="start">
       <mat-label> {{selectedConnection?.name}} Connection</mat-label>
+    </mat-card-header> -->
+
+    <mat-card-header>
+      <mat-card-title>  <img src='assets/images/{{selectedConnection.img}}' slot="start"> {{selectedConnection?.name}} Connection </mat-card-title>
     </mat-card-header>
+
     <mat-card-content>
 
       <mat-form-field class="full-width" appearance="fill">
@@ -39,27 +44,27 @@
         <br>
         <label>Warehouse Name </label>
         <mat-form-field class="full-width" appearance="fill">
-          <input matInput placeholder="Enter Snowflake Wearhouse name" required>
+          <input matInput placeholder="Enter Snowflake Wearhouse name" formControlName="wearhouseName">
         </mat-form-field>
         <br>
         <label>Database Name </label>
         <mat-form-field class="full-width" appearance="fill">
-          <input matInput placeholder="Enter Snowflake Database name" required>
+          <input matInput placeholder="Enter Snowflake Database name" formControlName="databaseName">
         </mat-form-field>
         <br>
         <label>Schema Name </label>
         <mat-form-field class="full-width" appearance="fill">
-          <input matInput value="public">
+          <input matInput value="public" formControlName="schemaname">
         </mat-form-field>
         <hr>
         <label>User </label>
         <mat-form-field class="full-width" appearance="fill">
-          <input matInput placeholder="Enter user name" required>
+          <input matInput placeholder="Enter user name" formControlName="username">
         </mat-form-field>
         <br>
         <label>Password </label>
         <mat-form-field class="full-width" appearance="fill">
-          <input type="password" matInput placeholder="Enter password">
+          <input type="password" matInput placeholder="Enter password" formControlName="password">
         </mat-form-field>
         <hr>
         <label>Stage Name</label>
@@ -72,7 +77,7 @@
         <br>
         <div class="full-width" style="text-align: left;">
           <label></label>
-          <mat-checkbox formControlName="isAutoCommit">Auto Commit </mat-checkbox>
+          <mat-checkbox formControlName="isAutoCommit" formControlName="autocomit">Auto Commit </mat-checkbox>
           <mat-icon name="info"></mat-icon>
         </div>
         <br>
@@ -83,13 +88,17 @@
         </mat-form-field>
         <br>
         <label style="text-align: left;" >Other Parameters </label>
+        <mat-form-field class="full-width" appearance="fill">
+          <textarea matInput placeholder="Enter other parameters"
+            formControlName="otherparams"> </textarea>
+        </mat-form-field>
         <br>
         <label>JDBC Fetch Size </label>
         <button mat-icon-button matTooltip="Tooltip on the right side of  the element" matTooltipPosition="after">
           <mat-icon>info</mat-icon>
         </button>
         <mat-form-field class="full-width" appearance="fill">
-          <input matInput placeholder="Enter SQL to run each time at connect" formControlName="jdbcFetchSize"
+          <input matInput placeholder="Enter JDBC fetch size" formControlName="jdbcFetchSize"
             value="50000">
         </mat-form-field>
         <br>
@@ -98,7 +107,7 @@
           <mat-icon>info</mat-icon>
         </button>
         <mat-form-field class="full-width" appearance="fill">
-          <input matInput placeholder="Enter SQL to run each time at connect" formControlName="maxFieldSize">
+          <input matInput placeholder="Enter Max Field Size" formControlName="maxFieldSize">
         </mat-form-field>
         <br>
         <label>Max Rows to Read </label>
@@ -106,7 +115,7 @@
           <mat-icon>info</mat-icon>
         </button>
         <mat-form-field class="full-width" appearance="fill">
-          <input matInput placeholder="Enter SQL to run each time at connect" formControlName="maxRowsToRead">
+          <input matInput placeholder="Enter Max Rows to Read" formControlName="maxRowsToRead">
         </mat-form-field>
         <br>
 

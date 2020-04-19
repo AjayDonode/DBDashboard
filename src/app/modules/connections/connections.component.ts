@@ -3,6 +3,9 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { SelectConnectionDialogComponent } from './select-connection-dialog/select-connection-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConnectionService } from 'src/app/services/connection.service';
+import { HubService } from 'src/app/services/hub.service';
+import { DataHub } from 'src/app/modals/connection.modal';
+
 
 @Component({
   selector: 'app-connections',
@@ -10,25 +13,24 @@ import { ConnectionService } from 'src/app/services/connection.service';
   styleUrls: ['./connections.component.scss']
 })
 export class ConnectionsComponent implements OnInit {
-
-
-  // formSelect: FormGroup;
   title = 'materialApp';
-  // myControl = new FormControl();
   tags = [];
   connections: any = [];
+  dataHubs: any = [];
+  dataHub: DataHub;
   selectedConnectionType: any;
-  @ViewChild('div') div: ElementRef;
-
-
-  constructor(private dialog: MatDialog, private conncetionService: ConnectionService) {
-
+  myControl = new FormControl();
+  constructor(private dialog: MatDialog, private conncetionService: ConnectionService, private hubService: HubService) {
     this.loadStates();
     this.loadConnections();
   }
 
   ngOnInit(): void {
 
+
+    this.myControl.valueChanges.subscribe(userInput => {
+      this.filterConnectionList(userInput);
+  });
   }
 
   loadStates() {
@@ -36,22 +38,19 @@ export class ConnectionsComponent implements OnInit {
       'transformations', 'user-defined api', 'validation', 'web services', 'workfing with files', 'workflow', 'xslt'];
   }
 
-
-
   openDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = this.connections;
     const dialogRef = this.dialog.open(SelectConnectionDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedConnectionType = result;
-
-      console.log(`Dialog result: ${result.name}`);
+    this.dataHub = null;
+    this.selectedConnectionType = result;
     });
   }
 
   loadConnections() {
     this.conncetionService.getConnections().subscribe(data => {
-      //this.connections = data;
+      // this.connections = data;
       console.log(data);
     });
 
@@ -61,7 +60,8 @@ export class ConnectionsComponent implements OnInit {
     },
     {
       name: 'Snowflakes',
-      childs: [{ name: 'Snowflake', img: 'snowflake.png' }, { name: 'Snowflake S3', img: 's3.png' }]
+      childs: [{ name: 'Snowflake',  datasourcespk: '54f27422-d19d-4658-b8f3-2f1443d3aae6', img: 'snowflake.png' },
+       { name: 'Snowflake S3', img: 's3.png' }]
     },
     {
       name: 'Database',
@@ -75,13 +75,42 @@ export class ConnectionsComponent implements OnInit {
         img: 'snowflake.png'
       }, { name: 'Oracle LDAP', img: 'snowflake.png' }]
     }
-    ]
+    ];
+
+    this.loadConnectionsForUser(1);
   }
 
   public save(formValue: any): void {
     console.log('Form Value in Parent : ', formValue);
-    this.conncetionService.saveConnection(formValue).subscribe(res => {
+    this.hubService.saveConnection(formValue).subscribe(res => {
       console.log(res);
+      this.selectedConnectionType = null;
+      this.loadConnectionsForUser(1);
     });
+}
+
+ loadConnectionsForUser(userId: any) {
+  console.log('Loading the list of user connections ');
+  this.hubService.getAll().subscribe(res => {
+    console.log(res);
+    this.dataHubs = res;
+  });
+}
+
+selectDataHub(dataHub: DataHub){
+  this.dataHub = dataHub;
+  let datasourcetype = { name: 'Snowflake',  datasourcespk: '54f27422-d19d-4658-b8f3-2f1443d3aae6', img: 'snowflake.png' };
+  this.selectedConnectionType = datasourcetype;
+}
+
+filterConnectionList(input: string) {
+  if (typeof input != "string") {
+    return [];
+}
+if (input === '' || input === null) {
+    return [];
+}
+  return input ?
+  this.dataHubs.filter(dataHub => dataHub.datahubname.toLowerCase().indexOf(input.toLowerCase()) != -1): this.dataHubs;
 }
 }

@@ -13,12 +13,15 @@ import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatTreeModule } from '@angular/material/tree';
 import { RouterModule } from '@angular/router';
+import {MatChipsModule} from '@angular/material/chips';
+import { PilllistComponent } from './components/pilllist/pilllist.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    PilllistComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +34,8 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     MatInputModule,
     MatTreeModule,
-    RouterModule
+    RouterModule,
+    MatChipsModule
   ],
   exports: [
     HeaderComponent,
