@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl: 'https://dcservice1.herokuapp.com/dc_services'
 };
