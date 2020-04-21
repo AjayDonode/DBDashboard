@@ -102,7 +102,7 @@ export class SnowflakeComponent implements OnInit, OnChanges {
       accountName: form.accountName,
       wearhouseName: form.wearhouseName,
       databaseName: form.databaseName,
-      isAutoCommit: form.isAutoCommit,
+      autocomit: form.autocomit,
       runAtConnect: form.runAtConnect,
       jdbcFetchSize: form.jdbcFetchSize,
       maxFieldSize: form.maxFieldSize,

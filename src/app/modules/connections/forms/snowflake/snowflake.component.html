@@ -8,13 +8,12 @@
     <mat-card-header>
       <mat-card-title>  <img src='assets/images/{{selectedConnection.img}}' slot="start"> {{selectedConnection?.name}} Connection </mat-card-title>
     </mat-card-header>
-
     <mat-card-content>
-
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Connection Name</mat-label>
         <input matInput placeholder="Name" formControlName="connectionName">
       </mat-form-field>
+        <mat-slide-toggle>Enabled</mat-slide-toggle>
       <!-- Email -->
       <br>
       <mat-form-field class="full-width" appearance="fill">
@@ -68,18 +67,20 @@
         </mat-form-field>
         <hr>
         <label>Stage Name</label>
-        <mat-icon name="info"></mat-icon>
+        <button mat-icon-button [disabled]="false">
+          <mat-icon matTooltip="Tool tip for this field is pending" matTooltipPosition="after">info</mat-icon>
+        </button>
         <mat-form-field class="full-width" appearance="fill">
           <input matInput
             placeholder="Enter name of the location where your data files are stored for loading into Snowflake"
             required>
         </mat-form-field>
         <br>
-        <div class="full-width" style="text-align: left;">
-          <label></label>
-          <mat-checkbox formControlName="isAutoCommit" formControlName="autocomit">Auto Commit </mat-checkbox>
-          <mat-icon name="info"></mat-icon>
-        </div>
+        <!-- <label>Auto Commit  </label> -->
+        <mat-form-field class="full-width">
+          <input matInput class="checkbox">
+          <mat-checkbox formControlName="autocomit"> Auto Commit </mat-checkbox>
+        </mat-form-field>
         <br>
         <label>Run at Connect </label>
         <mat-form-field class="full-width" appearance="fill">
@@ -120,19 +121,22 @@
         <br>
 
         <br>
-        <div class="full-width">
+        <!-- <label>Auto Commit  </label> -->
+        <mat-form-field class="full-width">
+          <input matInput class="checkbox">
           <mat-checkbox formControlName="incloseInQuote">Always enclose table/column names in double quotes </mat-checkbox>
-          <mat-icon name="info"></mat-icon>
-        </div>
+        </mat-form-field>
         <br>
-        <div class="full-width">
+        <mat-form-field class="full-width">
+          <input matInput class="checkbox">
           <mat-checkbox formControlName="curruntDB">Current Database and Schema only </mat-checkbox>
           <mat-icon name="info"></mat-icon>
-        </div>
+        </mat-form-field>
       </div>
-      <mat-card-actions slot="end" class="row" >
-       <div slot="start"> <button mat-flat-button >Test Connection</button></div>
-        <div slot="end"><button mat-flat-button color="primary" [disabled]="!formConnection.valid" >Save</button> <button mat-flat-button color="warning">Cancel</button></div>
+      <mat-card-actions align="end">
+        <button mat-flat-button slot="start" >Test Connection</button>
+        <div fxFlex="80%"> </div>
+        <button mat-flat-button color="primary" [disabled]="!formConnection.valid" >Save</button> <button mat-flat-button color="secondry" >Cancel</button>
       </mat-card-actions>
     </mat-card-content>
   </mat-card>

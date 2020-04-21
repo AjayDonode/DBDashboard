@@ -21,6 +21,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 import {MatListModule} from '@angular/material/list';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -62,7 +64,8 @@ import { SnowflakeComponent } from 'src/app/modules/connections/forms/snowflake/
     MatButtonModule,
     MatDialogModule,
     MatListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSlideToggleModule
   ],
   exports: [ SnowflakeComponent ]
 })
