@@ -1,0 +1,143 @@
+<form [formGroup]="formConnection" novalidate (ngSubmit)="save(formConnection.value)">
+  <!-- <mat-card class="form-card" *ngIf="selectedConnectionType"> -->
+    <mat-card class="form-card">
+    <!-- <mat-card-header> <img src='assets/images/{{selectedConnection.img}}' style="height: 50%;" slot="start">
+      <mat-label> {{selectedConnection?.name}} Connection</mat-label>
+    </mat-card-header> -->
+
+    <mat-card-header>
+      <mat-card-title>  <img src='assets/images/{{selectedConnection.img}}' slot="start"> {{selectedConnection?.name}} Connection </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Connection Name</mat-label>
+        <input matInput placeholder="Name" formControlName="connectionName">
+      </mat-form-field>
+        <mat-slide-toggle>Enabled</mat-slide-toggle>
+      <!-- Email -->
+      <br>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Tags...</mat-label>
+        <mat-select [formControl]="" multiple>
+          <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="description" formControlName="description" appearance="fill"> </textarea>
+      </mat-form-field>
+      <hr>
+      <div style="text-align: right;">
+        <label>URL * </label>
+        <mat-form-field class="full-width" appearance="fill">
+          <input matInput
+            placeholder="jdbc:snowflake://account_name.snowflakecomputing.com/?warehouse=warehouse&db=database&schema=schema"
+            formControlName="url">
+        </mat-form-field>
+        <hr>
+        <label>Account Name </label>
+        <mat-form-field class="full-width" appearance="fill">
+          <input matInput placeholder="Enter Snowflake Account name" required>
+        </mat-form-field>
+        <br>
+        <label>Warehouse Name </label>
+        <mat-form-field class="full-width" appearance="fill">
+          <input matInput placeholder="Enter Snowflake Wearhouse name" formControlName="wearhouseName">
+        </mat-form-field>
+        <br>
+        <label>Database Name </label>
+        <mat-form-field class="full-width" appearance="fill">
+          <input matInput placeholder="Enter Snowflake Database name" formControlName="databaseName">
+        </mat-form-field>
+        <br>
+        <label>Schema Name </label>
+        <mat-form-field class="full-width" appearance="fill">
+          <input matInput value="public" formControlName="schemaname">
+        </mat-form-field>
+        <hr>
+        <label>User </label>
+        <mat-form-field class="full-width" appearance="fill">
+          <input matInput placeholder="Enter user name" formControlName="username">
+        </mat-form-field>
+        <br>
+        <label>Password </label>
+        <mat-form-field class="full-width" appearance="fill">
+          <input type="password" matInput placeholder="Enter password" formControlName="password">
+        </mat-form-field>
+        <hr>
+        <label>Stage Name</label>
+        <button mat-icon-button [disabled]="false">
+          <mat-icon matTooltip="Tool tip for this field is pending" matTooltipPosition="after">info</mat-icon>
+        </button>
+        <mat-form-field class="full-width" appearance="fill">
+          <input matInput
+            placeholder="Enter name of the location where your data files are stored for loading into Snowflake"
+            required>
+        </mat-form-field>
+        <br>
+        <!-- <label>Auto Commit  </label> -->
+        <mat-form-field class="full-width">
+          <input matInput class="checkbox">
+          <mat-checkbox formControlName="autocomit"> Auto Commit </mat-checkbox>
+        </mat-form-field>
+        <br>
+        <label>Run at Connect </label>
+        <mat-form-field class="full-width" appearance="fill">
+          <textarea matInput placeholder="Enter SQL to run each time at connect"
+            formControlName="runAtConnect"> </textarea>
+        </mat-form-field>
+        <br>
+        <label style="text-align: left;" >Other Parameters </label>
+        <mat-form-field class="full-width" appearance="fill">
+          <textarea matInput placeholder="Enter other parameters"
+            formControlName="otherparams"> </textarea>
+        </mat-form-field>
+        <br>
+        <label>JDBC Fetch Size </label>
+        <button mat-icon-button matTooltip="Tooltip on the right side of  the element" matTooltipPosition="after">
+          <mat-icon>info</mat-icon>
+        </button>
+        <mat-form-field class="full-width" appearance="fill">
+          <input matInput placeholder="Enter JDBC fetch size" formControlName="jdbcFetchSize"
+            value="50000">
+        </mat-form-field>
+        <br>
+        <label>Max Field Size </label>
+        <button mat-icon-button matTooltip="Tooltip on the right side of  the element" matTooltipPosition="after">
+          <mat-icon>info</mat-icon>
+        </button>
+        <mat-form-field class="full-width" appearance="fill">
+          <input matInput placeholder="Enter Max Field Size" formControlName="maxFieldSize">
+        </mat-form-field>
+        <br>
+        <label>Max Rows to Read </label>
+        <button mat-icon-button matTooltip="Tooltip on the right side of  the element" matTooltipPosition="after">
+          <mat-icon>info</mat-icon>
+        </button>
+        <mat-form-field class="full-width" appearance="fill">
+          <input matInput placeholder="Enter Max Rows to Read" formControlName="maxRowsToRead">
+        </mat-form-field>
+        <br>
+
+        <br>
+        <!-- <label>Auto Commit  </label> -->
+        <mat-form-field class="full-width">
+          <input matInput class="checkbox">
+          <mat-checkbox formControlName="incloseInQuote">Always enclose table/column names in double quotes </mat-checkbox>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width">
+          <input matInput class="checkbox">
+          <mat-checkbox formControlName="curruntDB">Current Database and Schema only </mat-checkbox>
+          <mat-icon name="info"></mat-icon>
+        </mat-form-field>
+      </div>
+      <mat-card-actions align="end">
+        <button mat-flat-button slot="start" >Test Connection</button>
+        <div fxFlex="80%"> </div>
+        <button mat-flat-button color="primary" [disabled]="!formConnection.valid" >Save</button> <button mat-flat-button color="secondry" >Cancel</button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</form>

@@ -22,7 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatListModule} from '@angular/material/list';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -34,6 +35,9 @@ import { RegisterComponent } from 'src/app/modules/register/register.component';
 
 
 import { SnowflakeComponent } from 'src/app/modules/connections/forms/snowflake/snowflake.component';
+import { TerradataComponent } from 'src/app/modules/connections/forms/terradata/terradata.component';
+import { OracleComponent } from 'src/app/modules/connections/forms/oracle/oracle.component';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +50,9 @@ import { SnowflakeComponent } from 'src/app/modules/connections/forms/snowflake/
     ConnectionsComponent,
     SelectConnectionDialogComponent,
     RegisterComponent,
-    SnowflakeComponent],
+    SnowflakeComponent,
+    TerradataComponent,
+    OracleComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -65,8 +71,10 @@ import { SnowflakeComponent } from 'src/app/modules/connections/forms/snowflake/
     MatDialogModule,
     MatListModule,
     MatCheckboxModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTooltipModule,
+    ScrollingModule
   ],
-  exports: [ SnowflakeComponent ]
+  exports: [ SnowflakeComponent, TerradataComponent, OracleComponent, MatTooltipModule ]
 })
 export class DefaultModule { }

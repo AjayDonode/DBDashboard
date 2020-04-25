@@ -1,8 +1,6 @@
 .connectionsbox{
   text-align: center;
-  max-height: 600px;
-  min-height: 500px;
-  overflow-y: auto;
+  height: 100%;
 }
 
 .tp-form {
@@ -46,4 +44,18 @@
 .primary{
   background-color: blue($color: #19606d);
   color: blue($color: #000000);
+}
+
+.checkbox{
+  display: none;
+  height: 0px;
+}
+
+
+mat-card-header {
+img {
+  vertical-align: text-top;
+  border-radius: 4px;
+  width: 25px;
+}
 }

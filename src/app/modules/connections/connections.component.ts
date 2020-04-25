@@ -69,7 +69,7 @@ export class ConnectionsComponent implements OnInit {
     },
     {
       name: 'Oracle',
-      childs: [{ name: 'Oracle CDC', img: 'oracle.png' }, { name: 'Oracle LDAP', img: 'snowflake.png' },
+      childs: [{ name: 'Oracle', img: 'oracle.png' }, { name: 'Oracle LDAP', img: 'oracle.png' },
       { name: 'Oracle DB', img: 'oracle.png' }, {
         name: 'Oracle LDAP',
         img: 'snowflake.png'
