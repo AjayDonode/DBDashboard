@@ -2,13 +2,19 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const port = process.env.PORT || 3001;
 
-console.log("Service Application"+process.env.PORT);
-app.use(express.static(__dirname+'/dist/dbdashboard'));
+const deploypath = __dirname+'/dbdashboard';
+app.use(express.static(deploypath));
 
-app.get('/*', function(req,res){
-  console.log("Service Application"+process.env.PORT);
-res.sendFile(path.join(__dirname+'/dist/dbdashboard/index.html'));
-app.listen(process.env.PORT || 8080, ()=> console.log('Example app listening at http://localhost:${port}'));
+app.get('/*', (req,res) => {
+  console.log("Service Application "+port);
+res.sendFile(path.join(__dirname+'/dbdashboard/index.html'));
+
 
 })
+
+app.get('/ping', (req, res) => res.send('Hello World!'))
+
+// app.listen(port || 8080, ()=> console.log('Example app listening at http://localhost:${port}'));
+ app.listen(port|| 8080, () => console.log(`Example app listening at http://localhost:${port}`))
