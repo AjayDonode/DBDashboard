@@ -18,15 +18,19 @@ export class HubService {
 
   saveConnection(dataHub: DataHub): Observable<any> {
     console.log(dataHub.datasourceid);
-    // if(dataHub.datahubid) {
-    //   return this.http.put<any>(this.baseUrl + '/hub/', dataHub);
-    // } else {
+    if (dataHub.datahubid) {
+      return this.http.put<any>(this.baseUrl + '/hub/'+ dataHub.datahubid+"/", dataHub);
+    } else {
     return this.http.post<any>(this.baseUrl + '/hub/', dataHub);
-    // }
+    }
   }
 
   getAll(): Observable<any> {
     return this.http.get<any>(this.baseUrl + '/hub/');
+  }
+
+  deleteConnection(dataHub): Observable<any>{
+    return this.http.delete(this.baseUrl + '/hub/'+ dataHub.datahubid +"/")
   }
 
 }

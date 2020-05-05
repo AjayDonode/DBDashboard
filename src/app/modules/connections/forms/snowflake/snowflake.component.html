@@ -13,7 +13,7 @@
         <mat-label>Connection Name</mat-label>
         <input matInput placeholder="Name" formControlName="connectionName">
       </mat-form-field>
-        <mat-slide-toggle>Enabled</mat-slide-toggle>
+      <mat-slide-toggle formControlName="connectionName" onchange="validateConnection()" >Enabled</mat-slide-toggle>
       <!-- Email -->
       <br>
       <mat-form-field class="full-width" appearance="fill">

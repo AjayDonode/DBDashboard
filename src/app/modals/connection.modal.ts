@@ -4,6 +4,7 @@ export class Connection {
   displaysequence: number;
   connectiontemplate: any;
   datasourceimage: string;
+  sourcecategory: string;
   activeflag: number;
 }
 

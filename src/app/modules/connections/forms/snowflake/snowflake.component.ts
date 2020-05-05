@@ -91,7 +91,7 @@ export class SnowflakeComponent implements OnInit, OnChanges {
   }
 
   save(form) {
-    if(this.dataHub == null ){
+    if (this.dataHub == null ) {
       this.dataHub = new DataHub();
     }
     this.dataHub.datasourceid = this.selectedConnection.datasourcespk;

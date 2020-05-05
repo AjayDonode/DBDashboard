@@ -25,6 +25,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatListModule} from '@angular/material/list';
+
+import {MatTableModule} from '@angular/material/table';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { SelectConnectionDialogComponent } from 'src/app/modules/connections/select-connection-dialog/select-connection-dialog.component';
@@ -73,7 +76,8 @@ import { OracleComponent } from 'src/app/modules/connections/forms/oracle/oracle
     MatCheckboxModule,
     MatSlideToggleModule,
     MatTooltipModule,
-    ScrollingModule
+    ScrollingModule,
+    MatTableModule
   ],
   exports: [ SnowflakeComponent, TerradataComponent, OracleComponent, MatTooltipModule ]
 })
