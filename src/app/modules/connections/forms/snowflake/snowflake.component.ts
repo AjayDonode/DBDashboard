@@ -51,7 +51,6 @@ export class SnowflakeComponent implements OnInit, OnChanges {
       activeflag: 0,
       conndescription: '',
       connectionpayload: {}
-
     };
   }
 
@@ -78,7 +77,6 @@ export class SnowflakeComponent implements OnInit, OnChanges {
       curruntDB: dataHub.connectionpayload.curruntDB,
     });
   }
-
 
   onToggleChange(value) {
     if (value.checked === true) {
