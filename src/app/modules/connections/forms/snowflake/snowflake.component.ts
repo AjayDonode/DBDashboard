@@ -19,7 +19,6 @@ export class SnowflakeComponent implements OnInit, OnChanges {
   @Input()
   dataHub: DataHub = null;
 
-
   @Output()
   saveFormEvent: EventEmitter<any> = new EventEmitter<any>();
 
@@ -33,14 +32,16 @@ export class SnowflakeComponent implements OnInit, OnChanges {
     } else {
       this.setViewFormWithValues(this.dataHub);
     }
+    console.log(" ngOnInit"+ this.dataHub);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.dataHub == null) {
       this.setViewForm();
     }
-
     this.setViewFormWithValues(this.dataHub);
+
+    console.log("ngOnChanges "+this.dataHub.datahubid);
   }
 
   setViewForm() {
@@ -90,7 +91,7 @@ export class SnowflakeComponent implements OnInit, OnChanges {
     if (this.dataHub == null ) {
       this.dataHub = new DataHub();
     }
-    this.dataHub.datahubid = this.selectedConnection.datasourcespk;
+    this.dataHub.datasourceid = this.selectedConnection.datasourcespk;
     this.dataHub.datahubname = form.connectionName;
     this.dataHub.conndescription = form.description;
     this.dataHub.connectionpayload = {
@@ -108,7 +109,8 @@ export class SnowflakeComponent implements OnInit, OnChanges {
       schemaname: form.schemaname,
       otherparams: form.otherparams,
       username: form.username,
-      password: form.password
+      password: form.password,
+      connectiontype: this.selectedConnection.datasourcetype
     };
 
     console.log(this.dataHub);

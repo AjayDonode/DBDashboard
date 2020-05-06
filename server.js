@@ -8,10 +8,7 @@ const deploypath = __dirname+'/dbdashboard';
 app.use(express.static(deploypath));
 
 app.get('/*', (req,res) => {
-  console.log("Service Application "+port);
 res.sendFile(path.join(__dirname+'/dbdashboard/index.html'));
-
-
 })
 
 app.get('/ping', (req, res) => res.send('Hello World!'))

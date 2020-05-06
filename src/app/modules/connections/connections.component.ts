@@ -15,7 +15,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./connections.component.scss']
 })
 export class ConnectionsComponent implements OnInit {
-  title = 'materialApp';
   tags = [];
   connections: any = [];
   dataHubs: any = [];
@@ -29,8 +28,6 @@ export class ConnectionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
     this.myControl.valueChanges.subscribe(userInput => {
       this.filterConnectionList(userInput);
     });
@@ -48,7 +45,6 @@ export class ConnectionsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.dataHub = null;
       this.selectedConnectionType = result;
-      console.log(this.selectedConnectionType);
     });
   }
 
@@ -62,34 +58,8 @@ export class ConnectionsComponent implements OnInit {
       }).value();
 
     });
-
-
-    // this.connections = [{
-    //   name: 'Amazon',
-    //   childs: [{ name: 'AWS', img: 'postgresql.png' }, { name: 'Amazon S3', img: 's3.png' }]
-    // },
-    // {
-    //   name: 'Snowflakes',
-    //   childs: [{ name: 'Snowflake',  datasourcespk: '54f27422-d19d-4658-b8f3-2f1443d3aae6', img: 'snowflake.png' },
-    //    { name: 'Snowflake S3', img: 's3.png' }]
-    // },
-    // {
-    //   name: 'Database',
-    //   childs: [{ name: 'Microsoft Sql Server', img: 'snowflake.png' }, { name: 'Snowflake S3', img: 's3.png' }]
-    // },
-    // {
-    //   name: 'Oracle',
-    //   childs: [{ name: 'Oracle', img: 'oracle.png' }, { name: 'Oracle LDAP', img: 'oracle.png' },
-    //   { name: 'Oracle DB', img: 'oracle.png' }, {
-    //     name: 'Oracle LDAP',
-    //     img: 'snowflake.png'
-    //   }, { name: 'Oracle LDAP', img: 'snowflake.png' }]
-    // }
-    // ];
-
     this.loadConnectionsForUser(1);
   }
-
 
 
   public save(formValue: any): void {
@@ -108,11 +78,12 @@ export class ConnectionsComponent implements OnInit {
     });
   }
 
+  // Called when list of connection clicked
   selectDataHub(dataHub: DataHub) {
     this.dataHub = dataHub;
-    const datasourcetype = { name: dataHub.datahubname, datasourcespk: dataHub.datahubid, datasourcetype: 'Snowflake' };
+    const datasourcetype = { name: dataHub.datahubname, datasourcespk: dataHub.datasourceid,
+      datasourcetype: dataHub.connectionpayload.connectiontype };
     this.selectedConnectionType = datasourcetype;
-    console.log(this.selectedConnectionType);
   }
 
   filterConnectionList(input: string) {
