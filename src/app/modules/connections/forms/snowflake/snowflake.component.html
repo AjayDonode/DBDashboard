@@ -6,14 +6,14 @@
     </mat-card-header> -->
 
     <mat-card-header>
-      <mat-card-title>  <img src='assets/images/{{selectedConnection.img}}' slot="start"> {{selectedConnection?.name}} Connection </mat-card-title>
+      <mat-card-title>  <img src='assets/images/{{selectedConnection.datasourcetype}}.png' slot="start"> {{selectedConnection?.name}} Connection </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Connection Name</mat-label>
         <input matInput placeholder="Name" formControlName="connectionName">
-      </mat-form-field>
-      <mat-slide-toggle formControlName="connectionName" onchange="validateConnection()" >Enabled</mat-slide-toggle>
+      </mat-form-field> &nbsp;
+      <mat-slide-toggle formControlName="activeflag" (change)="onToggleChange($event)" >Enabled</mat-slide-toggle>
       <!-- Email -->
       <br>
       <mat-form-field class="full-width" appearance="fill">
@@ -38,7 +38,7 @@
         <hr>
         <label>Account Name </label>
         <mat-form-field class="full-width" appearance="fill">
-          <input matInput placeholder="Enter Snowflake Account name" required>
+          <input matInput placeholder="Enter Snowflake Account name" formControlName="accountName">
         </mat-form-field>
         <br>
         <label>Warehouse Name </label>
@@ -104,7 +104,7 @@
         </mat-form-field>
         <br>
         <label>Max Field Size </label>
-        <button mat-icon-button matTooltip="Tooltip on the right side of  the element" matTooltipPosition="after">
+        <button mat-icon-button matTooltip="JDBC Fetch size for test fetch records" matTooltipPosition="after">
           <mat-icon>info</mat-icon>
         </button>
         <mat-form-field class="full-width" appearance="fill">

@@ -29,11 +29,11 @@
       <mat-grid-list cols="4">
         <mat-grid-tile *ngFor="let connectionType of connectionTypes">
             <mat-card (click)="navigate(connectionType)">
-              <mat-card-header style="align-items: center;">{{connectionType.datasourcename}}</mat-card-header>
+              <mat-card-header style="align-items: center;">{{connectionType.datasourcetype}}</mat-card-header>
               <mat-divider></mat-divider>
               <mat-card-content >
                 <br>
-              <img src="assets/images/{{connectionType.datasourceimage}}" >
+              <img src="assets/images/{{connectionType.datasourcetype}}.png" >
                 </mat-card-content>
             </mat-card>
         </mat-grid-tile>

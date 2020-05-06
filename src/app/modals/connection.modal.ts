@@ -13,7 +13,7 @@ export class DataHub {
   datahubid: string;
   datahubname: string;
   datasourceid: string;
-  activeflag: boolean;
+  activeflag: number;
   conndescription: string;
   connectionpayload: any;
 }

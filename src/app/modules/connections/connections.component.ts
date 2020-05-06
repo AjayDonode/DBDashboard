@@ -6,6 +6,7 @@ import { ConnectionService } from 'src/app/services/connection.service';
 import { HubService } from 'src/app/services/hub.service';
 import { DataHub, Connection } from 'src/app/modals/connection.modal';
 import * as _ from 'lodash';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class ConnectionsComponent implements OnInit {
   dataHub: DataHub;
   selectedConnectionType: any;
   myControl = new FormControl();
-  constructor(private dialog: MatDialog, private conncetionService: ConnectionService, private hubService: HubService) {
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar,
+              private conncetionService: ConnectionService, private hubService: HubService) {
     this.loadStates();
     this.loadConnections();
   }
@@ -45,18 +47,18 @@ export class ConnectionsComponent implements OnInit {
     const dialogRef = this.dialog.open(SelectConnectionDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       this.dataHub = null;
-      console.log(result);
       this.selectedConnectionType = result;
+      console.log(this.selectedConnectionType);
     });
   }
 
   loadConnections() {
     this.conncetionService.getConnectionsById(1).subscribe(data => {
-      this.connections = _.chain(data).groupBy('datasourcetype').map((v, i) => {
+      this.connections = _.chain(data).groupBy('usersourcecategory').map((v, i) => {
         return {
           name: i,
           childs: _.map(v)
-        }
+        };
       }).value();
 
     });
@@ -93,8 +95,7 @@ export class ConnectionsComponent implements OnInit {
   public save(formValue: any): void {
     console.log('Form Value in Parent : ', formValue);
     this.hubService.saveConnection(formValue).subscribe(res => {
-      console.log(res);
-      this.selectedConnectionType = null;
+      this.openSnackBar('Saved : Connection "' + formValue.datahubname + '"');
       this.loadConnectionsForUser(1);
     });
   }
@@ -109,25 +110,36 @@ export class ConnectionsComponent implements OnInit {
 
   selectDataHub(dataHub: DataHub) {
     this.dataHub = dataHub;
-    let datasourcetype = { name: 'Snowflake', datasourcespk: '54f27422-d19d-4658-b8f3-2f1443d3aae6', img: 'snowflake.png' };
+    const datasourcetype = { name: dataHub.datahubname, datasourcespk: dataHub.datahubid, datasourcetype: 'Snowflake' };
     this.selectedConnectionType = datasourcetype;
+    console.log(this.selectedConnectionType);
   }
 
   filterConnectionList(input: string) {
-    if (typeof input != "string") {
+    if (typeof input !== 'string') {
       return [];
     }
     if (input === '' || input === null) {
       return [];
     }
     return input ?
-      this.dataHubs.filter(dataHub => dataHub.datahubname.toLowerCase().indexOf(input.toLowerCase()) != -1) : this.dataHubs;
+      this.dataHubs.filter(dataHub => dataHub.datahubname.toLowerCase().indexOf(input.toLowerCase()) !== -1) : this.dataHubs;
   }
 
-  delete(dataHub: DataHub){
+  delete(dataHub: DataHub) {
     this.hubService.deleteConnection(dataHub).subscribe(res => {
       console.log(res);
-      this.dataHubs.removeItem(dataHub);
+      const index = this.dataHubs.findIndex(d => d.datahubid === dataHub.datahubid); // find index in your array
+      this.dataHubs.splice(index, 1);  // remove element from array
+      this.openSnackBar('Removed : Connection "' + dataHub.datahubname + '"');
+    });
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
     });
   }
 }

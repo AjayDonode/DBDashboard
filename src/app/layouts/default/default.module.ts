@@ -25,7 +25,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatListModule} from '@angular/material/list';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -77,7 +77,8 @@ import { OracleComponent } from 'src/app/modules/connections/forms/oracle/oracle
     MatSlideToggleModule,
     MatTooltipModule,
     ScrollingModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule
   ],
   exports: [ SnowflakeComponent, TerradataComponent, OracleComponent, MatTooltipModule ]
 })

@@ -28,7 +28,7 @@ export class SnowflakeComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    if(this.dataHub == null) {
+    if (this.dataHub == null) {
       this.setViewForm();
     } else {
       this.setViewFormWithValues(this.dataHub);
@@ -36,46 +36,35 @@ export class SnowflakeComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(this.dataHub == null) {
+    if (this.dataHub == null) {
       this.setViewForm();
-    } else {
-      this.setViewFormWithValues(this.dataHub);
     }
+
+    this.setViewFormWithValues(this.dataHub);
   }
 
   setViewForm() {
-    this.formConnection = this.formBuilder.group({
-      connectionName: [null, [Validators.required]],
-      description: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-      url: [null, Validators.required],
-      accountName: '',
-      wearhouseName: '',
-      databaseName: '',
-      isAutoCommit: '',
-      runAtConnect: '',
-      jdbcFetchSize: '',
-      maxFieldSize: '',
-      maxRowsToRead: '',
-      incloseInQuote: '',
-      schemaname: '',
-      username: '',
-      password: '',
-      autocomit: '',
-      otherparams: '',
-      curruntDB: ''
-    });
+    this.dataHub = {
+      datahubid: '',
+      datasourceid: '',
+      datahubname: '',
+      activeflag: 0,
+      conndescription: '',
+      connectionpayload: {}
+
+    };
   }
 
 
   setViewFormWithValues(dataHub: DataHub) {
     this.formConnection = this.formBuilder.group({
       connectionName: [dataHub.datahubname, [Validators.required]],
+      activeflag: [dataHub.activeflag, [Validators.required]],
       description: [dataHub.conndescription, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       url: [dataHub.connectionpayload.url, Validators.required],
-      accountName: dataHub.connectionpayload.connectionName,
+      accountName: dataHub.connectionpayload.accountName,
       wearhouseName: dataHub.connectionpayload.wearhouseName,
       databaseName: dataHub.connectionpayload.databaseName,
-      isAutoCommit: dataHub.connectionpayload.isAutoCommit,
       runAtConnect: dataHub.connectionpayload.runAtConnect,
       jdbcFetchSize: dataHub.connectionpayload.jdbcFetchSize,
       maxFieldSize: dataHub.connectionpayload.maxFieldSize,
@@ -90,11 +79,20 @@ export class SnowflakeComponent implements OnInit, OnChanges {
     });
   }
 
+
+  onToggleChange(value) {
+    if (value.checked === true) {
+      this.dataHub.activeflag = 1;
+    } else {
+      this.dataHub.activeflag = 0;
+    }
+  }
+
   save(form) {
     if (this.dataHub == null ) {
       this.dataHub = new DataHub();
     }
-    this.dataHub.datasourceid = this.selectedConnection.datasourcespk;
+    this.dataHub.datahubid = this.selectedConnection.datasourcespk;
     this.dataHub.datahubname = form.connectionName;
     this.dataHub.conndescription = form.description;
     this.dataHub.connectionpayload = {
@@ -108,7 +106,11 @@ export class SnowflakeComponent implements OnInit, OnChanges {
       maxFieldSize: form.maxFieldSize,
       maxRowsToRead: form.maxRowsToRead,
       incloseInQuote: form.incloseInQuote,
-      curruntDB: form.curruntDB
+      curruntDB: form.curruntDB,
+      schemaname: form.schemaname,
+      otherparams: form.otherparams,
+      username: form.username,
+      password: form.password
     };
 
     console.log(this.dataHub);
