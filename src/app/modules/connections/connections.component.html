@@ -6,7 +6,7 @@
           <mat-form-field class="tp-full-width">
             <mat-label>Tags</mat-label>
             <mat-select multiple>
-              <mat-option *ngFor="let tag of tags">{{ tag }}</mat-option>
+              <mat-option *ngFor="let tag of tags">{{ tag.tagname }}</mat-option>
             </mat-select>
           </mat-form-field>
           <button mat-icon-button color="primary">
@@ -15,7 +15,7 @@
           <mat-form-field class="tp-full-width">
             <mat-label>Search</mat-label>
             <mat-icon matPrefix>search</mat-icon>
-            <input type="text" matInput placeholder="Search" [formControl]="myControl" />
+            <input type="text" matInput placeholder="Search" [formControl]="filter" />
             <mat-icon matSuffix>mode_edit</mat-icon>
           </mat-form-field>
           <button mat-icon-button color="primary" (click)="openDialog()">
@@ -28,17 +28,14 @@
         <mat-divider></mat-divider>
         <div style="overflow-y: auto;">
           <mat-nav-list *ngIf="dataHubs">
-            <mat-list-item (click)="selectDataHub(dataHub)" *ngFor="let dataHub of dataHubs">
+            <mat-list-item (click)="selectDataHub(dataHub)" *ngFor="let dataHub of filteredStates$ | async">
               <!-- <mat-pseudo-checkbox></mat-pseudo-checkbox> -->
-              <div role="row" style="width: 100%; text-align: start;">
-                <label>{{ dataHub.datahubname }}</label>
-
+                <span style="width: 100%; text-align: left;">{{ dataHub.datahubname }}</span>
+                <mat-slide-toggle> </mat-slide-toggle>
                 <button mat-icon-button color="warn" (click)="delete(dataHub)">
                   <mat-icon>delete</mat-icon>
                 </button>
-
-              </div>
-            </mat-list-item>
+              </mat-list-item>
           </mat-nav-list>
         </div>
       </mat-card-content>

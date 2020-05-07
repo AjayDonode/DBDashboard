@@ -40,7 +40,7 @@ import { RegisterComponent } from 'src/app/modules/register/register.component';
 import { SnowflakeComponent } from 'src/app/modules/connections/forms/snowflake/snowflake.component';
 import { TerradataComponent } from 'src/app/modules/connections/forms/terradata/terradata.component';
 import { OracleComponent } from 'src/app/modules/connections/forms/oracle/oracle.component';
-
+import {FilterPipe } from 'src/app/shared/components/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,8 @@ import { OracleComponent } from 'src/app/modules/connections/forms/oracle/oracle
     RegisterComponent,
     SnowflakeComponent,
     TerradataComponent,
-    OracleComponent],
+    OracleComponent,
+    FilterPipe],
   imports: [
     CommonModule,
     RouterModule,
@@ -80,6 +81,6 @@ import { OracleComponent } from 'src/app/modules/connections/forms/oracle/oracle
     MatTableModule,
     MatSnackBarModule
   ],
-  exports: [ SnowflakeComponent, TerradataComponent, OracleComponent, MatTooltipModule ]
+  exports: [ SnowflakeComponent, TerradataComponent, OracleComponent, MatTooltipModule]
 })
 export class DefaultModule { }

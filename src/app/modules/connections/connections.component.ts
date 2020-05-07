@@ -7,6 +7,9 @@ import { HubService } from 'src/app/services/hub.service';
 import { DataHub, Connection } from 'src/app/modals/connection.modal';
 import * as _ from 'lodash';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, of, combineLatest } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { TagsService } from 'src/app/services/tags.service';
 
 
 @Component({
@@ -21,10 +24,28 @@ export class ConnectionsComponent implements OnInit {
   dataHub: DataHub;
   selectedConnectionType: any;
   myControl = new FormControl();
+
+
+  states$: Observable<DataHub[]>;
+  filteredStates$: Observable<DataHub[]>;
+  filter: FormControl;
+  filter$: Observable<string>;
+
+
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar,
-              private conncetionService: ConnectionService, private hubService: HubService) {
-    this.loadStates();
+              private conncetionService: ConnectionService, private hubService: HubService, private tagsService: TagsService) {
+    this.loadTags();
     this.loadConnections();
+  }
+
+
+  setFilters() {
+    this.states$ = of(this.dataHubs);
+    this.filter = new FormControl('');
+    this.filter$ = this.filter.valueChanges.pipe(startWith(''));
+    this.filteredStates$ = combineLatest([this.states$, this.filter$]).pipe(
+      map(([states, filterString]) => states.filter(state => state.datahubname.toLowerCase().indexOf(filterString.toLowerCase()) !== -1))
+    );
   }
 
   ngOnInit(): void {
@@ -33,9 +54,10 @@ export class ConnectionsComponent implements OnInit {
     });
   }
 
-  loadStates() {
-    this.tags = ['data migration', 'examples', 'mapping', 'redshift', 'scripting', 'snowflake',
-      'transformations', 'user-defined api', 'validation', 'web services', 'workfing with files', 'workflow', 'xslt'];
+  loadTags() {
+    this.tagsService.getAll().subscribe(data => {
+      this.tags = data;
+    });
   }
 
   openDialog() {
@@ -75,6 +97,7 @@ export class ConnectionsComponent implements OnInit {
     this.hubService.getAll().subscribe(res => {
       console.log(res);
       this.dataHubs = res;
+      this.setFilters();
     });
   }
 
@@ -105,6 +128,8 @@ export class ConnectionsComponent implements OnInit {
       this.openSnackBar('Removed : Connection "' + dataHub.datahubname + '"');
     });
   }
+
+  disable(dataHub: DataHub) {}
 
   openSnackBar(message: string) {
     this.snackBar.open(message, null, {
