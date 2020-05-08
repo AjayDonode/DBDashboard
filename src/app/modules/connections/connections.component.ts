@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, of, combineLatest } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { TagsService } from 'src/app/services/tags.service';
+import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class ConnectionsComponent implements OnInit {
   filter$: Observable<string>;
 
 
-  constructor(private dialog: MatDialog, private snackBar: MatSnackBar,
+  constructor(private dialog: MatDialog,  private dialogService: ConfirmDialogService,
               private conncetionService: ConnectionService, private hubService: HubService, private tagsService: TagsService) {
     this.loadTags();
     this.loadConnections();
@@ -87,7 +88,7 @@ export class ConnectionsComponent implements OnInit {
   public save(formValue: any): void {
     console.log('Form Value in Parent : ', formValue);
     this.hubService.saveConnection(formValue).subscribe(res => {
-      this.openSnackBar('Saved : Connection "' + formValue.datahubname + '"');
+      this.dialogService.openSnackBar('Saved : Connection "' + formValue.datahubname + '"');
       this.loadConnectionsForUser(1);
     });
   }
@@ -120,22 +121,42 @@ export class ConnectionsComponent implements OnInit {
       this.dataHubs.filter(dataHub => dataHub.datahubname.toLowerCase().indexOf(input.toLowerCase()) !== -1) : this.dataHubs;
   }
 
+
+  changeActive(value){
+    if (value.checked === true) {
+      this.dataHub.activeflag = 1;
+    } else {
+      this.dataHub.activeflag = 0;
+    }
+  }
+
+  openDeleteDialog(dataHub: DataHub) {
+    const options = {
+      title: 'Warning',
+      message: 'Do you want to remove connection : ' + dataHub.datahubname,
+      cancelText: 'Cancel',
+      confirmText: 'Yes'
+    };
+    this.dialogService.open(options);
+    this.dialogService.confirmed().subscribe(confirmed => {
+      if (confirmed) {
+        this.delete(dataHub);
+      }
+   });
+  }
+
   delete(dataHub: DataHub) {
     this.hubService.deleteConnection(dataHub).subscribe(res => {
       console.log(res);
       const index = this.dataHubs.findIndex(d => d.datahubid === dataHub.datahubid); // find index in your array
       this.dataHubs.splice(index, 1);  // remove element from array
-      this.openSnackBar('Removed : Connection "' + dataHub.datahubname + '"');
+      this.dialogService.openSnackBar('Removed : Connection "' + dataHub.datahubname + '"');
+      this.selectedConnectionType = null;
+      this.loadConnectionsForUser(1); // TODO better clear from local list :: PERSORNAMCE
     });
   }
 
   disable(dataHub: DataHub) {}
 
-  openSnackBar(message: string) {
-    this.snackBar.open(message, null, {
-      duration: 3000,
-      verticalPosition: 'top',
-      horizontalPosition: 'center'
-    });
-  }
+
 }

@@ -1,5 +1,5 @@
-<div fxLayout="row" >
-  <div fxFlex="20%">
+<div fxLayout="row" fxLayoutGap="16px">
+  <div fxFlex="25%">
     <mat-card class="connectionsbox">
       <mat-card-header>
         <form class="tp-form">
@@ -30,8 +30,8 @@
             <mat-list-item (click)="selectDataHub(dataHub)" *ngFor="let dataHub of filteredStates$ | async">
               <!-- <mat-pseudo-checkbox></mat-pseudo-checkbox> -->
                 <span style="width: 100%; text-align: left;">{{ dataHub.datahubname }}</span>
-                <mat-slide-toggle> </mat-slide-toggle>
-                <button mat-icon-button color="warn" (click)="delete(dataHub)">
+                <mat-slide-toggle (change) = "changeActive($event)" [checked] = "dataHub.activeflag ==1? true : false "> </mat-slide-toggle>
+                <button mat-icon-button color="warn" (click)="openDeleteDialog(dataHub)">
                   <mat-icon>delete</mat-icon>
                 </button>
               </mat-list-item>
@@ -40,7 +40,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div fxFlex="80%" [ngSwitch]="selectedConnectionType?.datasourcetype">
+  <div fxFlex="75%" [ngSwitch]="selectedConnectionType?.datasourcetype">
     <app-snowflake *ngSwitchCase="'Snowflake'" [selectedConnection]="selectedConnectionType" [dataHub]="dataHub"
       [tags]="tags" (saveFormEvent)="save($event)">SnowFlake</app-snowflake>
     <app-oracle *ngSwitchCase="'Oracle'" [selectedConnection]="selectedConnectionType" [dataHub]="dataHub" [tags]="tags"
@@ -51,7 +51,7 @@
       <mat-card class="form-card">
         <mat-card-header>
           <div mat-card-avatar style="
-              background-image: url('assets/images/oracle.png');
+              background-image: url('assets/images/undefined.png');
               background-size: cover;
             "></div>
           <mat-card-title> Select Connections </mat-card-title>

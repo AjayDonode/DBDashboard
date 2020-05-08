@@ -15,13 +15,15 @@ import { MatTreeModule } from '@angular/material/tree';
 import { RouterModule } from '@angular/router';
 import {MatChipsModule} from '@angular/material/chips';
 import { PilllistComponent } from './components/pilllist/pilllist.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
-    PilllistComponent
+    PilllistComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,
