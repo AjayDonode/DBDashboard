@@ -28,6 +28,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { SelectConnectionDialogComponent } from 'src/app/modules/connections/select-connection-dialog/select-connection-dialog.component';
@@ -40,6 +42,7 @@ import { RegisterComponent } from 'src/app/modules/register/register.component';
 import { SnowflakeComponent } from 'src/app/modules/connections/forms/snowflake/snowflake.component';
 import { TerradataComponent } from 'src/app/modules/connections/forms/terradata/terradata.component';
 import { OracleComponent } from 'src/app/modules/connections/forms/oracle/oracle.component';
+import { PostgresComponent } from 'src/app/modules/connections/forms/postgres/postgres.component';
 import {FilterPipe } from 'src/app/shared/components/pipes/filter.pipe';
 
 @NgModule({
@@ -56,6 +59,7 @@ import {FilterPipe } from 'src/app/shared/components/pipes/filter.pipe';
     SnowflakeComponent,
     TerradataComponent,
     OracleComponent,
+    PostgresComponent,
     FilterPipe],
   imports: [
     CommonModule,
@@ -79,7 +83,8 @@ import {FilterPipe } from 'src/app/shared/components/pipes/filter.pipe';
     MatTooltipModule,
     ScrollingModule,
     MatTableModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FlexLayoutModule
   ],
   exports: [ SnowflakeComponent, TerradataComponent, OracleComponent, MatTooltipModule]
 })
